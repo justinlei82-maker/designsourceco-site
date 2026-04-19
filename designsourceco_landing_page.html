@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DesignSourceCo</title>
+  <meta name="description" content="Custom product development and sourcing for retail and design projects." />
+  <style>
+    :root {
+      --bg: #f7f5f1;
+      --surface: #ffffff;
+      --text: #1f1f1c;
+      --muted: #66635c;
+      --line: #ddd8cf;
+      --accent: #3f5c4a;
+      --accent-2: #2d4034;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247, 245, 241, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover { background: var(--accent-2); }
+
+    .btn-secondary {
+      border-color: var(--line);
+      background: transparent;
+    }
+
+    .hero {
+      padding: 84px 0 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: #ecf1ed;
+      border-radius: 999px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.2rem, 6vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .lead {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 22px;
+    }
+
+    .trust {
+      margin: 24px 0 30px;
+      padding: 16px 18px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--text);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    }
+
+    .hero-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+
+    .hero-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    section {
+      padding: 56px 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      margin: 0 0 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      margin: 0 0 30px;
+      max-width: 720px;
+      color: var(--muted);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 24px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .steps {
+      counter-reset: item;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    .step-number {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      background: #ecf1ed;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .logo-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .logo-pill {
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      font-weight: 700;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .case-note {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    .cta {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 36px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .contact-box {
+      background: #faf9f6;
+      border: 1px dashed var(--line);
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .contact-box p {
+      margin: 10px 0;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 28px 0 48px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .cta,
+      .case-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-3,
+      .grid-4,
+      .steps {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .grid-3,
+      .grid-4,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top">DesignSourceCo</a>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Product Development + Sourcing</div>
+          <h1>Custom Product Development & Sourcing for Retail and Design Projects</h1>
+          <p class="lead">
+            We help retailers, distributors, and designers bring custom furniture and lighting products to market through trusted manufacturing partners.
+          </p>
+          <div class="trust">
+            <strong>Proven retail-facing experience:</strong> experience supporting product development for major North American retailers including Home Depot, Lowe’s, and Menards.
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Start a Project</a>
+            <a class="btn btn-secondary" href="#services">See Services</a>
+          </div>
+        </div>
+        <aside class="hero-card">
+          <h3>What clients need from us</h3>
+          <ul>
+            <li>Develop products with a clear cost target</li>
+            <li>Coordinate with factories efficiently</li>
+            <li>Balance design intent with manufacturability</li>
+            <li>Support smaller projects with more flexibility than large retail programs</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <h2 class="section-title">What We Do</h2>
+        <p class="section-subtitle">
+          We focus on turning product concepts into commercially viable, factory-ready solutions.
+        </p>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Custom Product Development</h3>
+            <p>Translate concepts, sketches, or reference products into practical development briefs for factory execution.</p>
+          </div>
+          <div class="card">
+            <h3>Furniture & Lighting Sourcing</h3>
+            <p>Identify suitable manufacturing partners and manage the sourcing process with attention to cost, quality, and feasibility.</p>
+          </div>
+          <div class="card">
+            <h3>Design-to-Production Coordination</h3>
+            <p>Bridge the gap between design intent and production reality through clear communication, documentation, and follow-through.</p>
+          </div>
+          <div class="card">
+            <h3>Factory Communication</h3>
+            <p>Support technical clarification, finish review, packaging expectations, and project alignment with overseas suppliers.</p>
+          </div>
+          <div class="card">
+            <h3>Quality & Value Engineering</h3>
+            <p>Help refine product details to align quality, functionality, target cost, and retail expectations.</p>
+          </div>
+          <div class="card">
+            <h3>Flexible Support for Mid-Size Clients</h3>
+            <p>Designed for businesses that want professional product development support without the complexity of large-chain procurement programs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">
+          Our process is simple, practical, and built for early-stage product conversations.
+        </p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Share Your Idea</h3>
+            <p>Send us your concept, drawing, inspiration image, or target product category.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Review & Strategy</h3>
+            <p>We assess feasibility, likely factory fit, and development direction before quoting.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Sampling & Refinement</h3>
+            <p>We support sample development, design clarification, and product adjustments as needed.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Production Coordination</h3>
+            <p>Once approved, we support production communication and execution follow-up.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <h2 class="section-title">Why Clients Work With Us</h2>
+        <p class="section-subtitle">
+          We combine product development experience, supplier coordination, and an understanding of North American retail expectations.
+        </p>
+        <div class="grid-4">
+          <div class="card">
+            <h3>Retail-Oriented Thinking</h3>
+            <p>We understand the pressure of cost targets, commercial viability, and practical execution.</p>
+          </div>
+          <div class="card">
+            <h3>Factory Access</h3>
+            <p>We work with trusted manufacturing resources in Asia and help match projects to the right production partner.</p>
+          </div>
+          <div class="card">
+            <h3>Cross-Functional Coordination</h3>
+            <p>We connect design, sourcing, technical clarification, and production follow-up in one workflow.</p>
+          </div>
+          <div class="card">
+            <h3>Built for Smaller Clients</h3>
+            <p>We bring big-retail development discipline to clients who need more flexibility and closer support.</p>
+          </div>
+        </div>
+
+        <div class="logo-strip" aria-label="Retail experience references">
+          <div class="logo-pill">Home Depot</div>
+          <div class="logo-pill">Lowe’s</div>
+          <div class="logo-pill">Menards</div>
+        </div>
+        <p class="case-note">
+          Reference is based on past experience supporting product development work related to major North American retail requirements.
+        </p>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">Example Project Directions</h2>
+        <p class="section-subtitle">
+          These examples show the types of projects and conversations we are set up to support.
+        </p>
+        <div class="case-grid">
+          <div class="card">
+            <h3>Retail-Ready Lighting Program</h3>
+            <p>Support the development of a lighting collection with target pricing, finish alignment, packaging considerations, and scalable sourcing paths.</p>
+          </div>
+          <div class="card">
+            <h3>Custom Furniture Development</h3>
+            <p>Coordinate concept refinement, supplier outreach, sampling, and manufacturing planning for furniture designed for showrooms, distributors, or project-based sales.</p>
+          </div>
+        </div>
+        <p class="case-note">
+          You can later replace this section with real case studies, project images, or category-specific landing pages.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h2 class="section-title">Start a Project Conversation</h2>
+            <p class="section-subtitle" style="margin-bottom:0;">
+              Tell us what you are trying to build, source, or develop. Early conversations can start with a rough idea, reference image, or target category.
+            </p>
+          </div>
+          <div class="contact-box">
+            <strong>Email</strong>
+            <p>youremail@example.com</p>
+            <strong>Suggested intake</strong>
+            <p>Project type / target market / target price / expected volume / timing</p>
+            <a class="btn btn-primary" href="mailto:youremail@example.com?subject=Project%20Inquiry%20-%20DesignSourceCo">Email Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 DesignSourceCo. All rights reserved.
+    </div>
+  </footer>
+</body>
+</html>
